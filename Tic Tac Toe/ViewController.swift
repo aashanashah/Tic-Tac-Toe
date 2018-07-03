@@ -14,6 +14,8 @@ class ViewController: UIViewController, UITextFieldDelegate {
     @IBOutlet var player2 : UITextField!
     @IBOutlet var labelErr : UILabel!
     @IBOutlet var music : UIButton!
+    @IBOutlet var multiPlayerButton : UIButton!
+    @IBOutlet var startButton : UIButton!
 
     override func viewDidLoad()
     {
@@ -24,7 +26,6 @@ class ViewController: UIViewController, UITextFieldDelegate {
         labelErr.isHidden = true
         player1.delegate = self
         player2.delegate = self
-        
         if UserDefaults.standard.object(forKey: "isPlaying") == nil
         {
             UserDefaults.standard.set(true, forKey: "isPlaying")
@@ -61,7 +62,9 @@ class ViewController: UIViewController, UITextFieldDelegate {
         player1.text = ""
         player2.text = ""
         labelErr.isHidden = true
-      
+        multiPlayerButton.isHidden = false
+        multiPlayerButton.setTitle("2-Player Mode", for: .normal)
+        player2.isHidden = true
         MyAudioPlayer.playFile(name: "music", type: "mp3")
         if UserDefaults.standard.bool(forKey: "isPlaying")
         {
@@ -73,6 +76,10 @@ class ViewController: UIViewController, UITextFieldDelegate {
             MyAudioPlayer.mute()
             music.setBackgroundImage(UIImage(named: "mute"), for: .normal)
         }
+    }
+    @IBAction func playerModeButton(sender : UIButton)
+    {
+        
     }
     @IBAction func play(sender: UIButton)
     {
