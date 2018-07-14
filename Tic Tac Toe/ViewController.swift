@@ -14,22 +14,19 @@ class ViewController: UIViewController, UITextFieldDelegate {
     @IBOutlet var player2 : UITextField!
     @IBOutlet var labelErr : UILabel!
     @IBOutlet var music : UIButton!
-    @IBOutlet var multiPlayerButton : UIButton!
     @IBOutlet var startButton : UIButton!
+    @IBOutlet var backButton : UIButton!
+    var player : Int!
+    var level : String!
 
     override func viewDidLoad()
     {
         super.viewDidLoad()
         self.view.layer.contents = UIImage(named: "backview")?.cgImage
-
         self.navigationController?.isNavigationBarHidden = true
         labelErr.isHidden = true
         player1.delegate = self
         player2.delegate = self
-        if UserDefaults.standard.object(forKey: "isPlaying") == nil
-        {
-            UserDefaults.standard.set(true, forKey: "isPlaying")
-        }
     }
 
     override func didReceiveMemoryWarning()
@@ -54,18 +51,28 @@ class ViewController: UIViewController, UITextFieldDelegate {
             let boardViewController = self.storyboard?.instantiateViewController(withIdentifier: "BoardViewController") as! BoardViewController
             boardViewController.name1 = player1.text
             boardViewController.name2 = player2.text
+            boardViewController.player = player
+            boardViewController.level = level
             self.navigationController?.pushViewController(boardViewController, animated: true)
         }
     }
     override func viewWillAppear(_ animated : Bool)
     {
         player1.text = ""
-        player2.text = ""
         labelErr.isHidden = true
-        multiPlayerButton.isHidden = false
-        multiPlayerButton.setTitle("2-Player Mode", for: .normal)
-        player2.isHidden = true
-        MyAudioPlayer.playFile(name: "music", type: "mp3")
+        backButton.layer.cornerRadius = 5
+        backButton.layer.borderWidth = 1
+        backButton.layer.borderColor = UIColor.black.cgColor
+        if player == 1
+        {
+            player2.text = "Computer"
+            player2.isEnabled = false
+        }
+        else
+        {
+            player2.text = ""
+            player2.isEnabled = true
+        }
         if UserDefaults.standard.bool(forKey: "isPlaying")
         {
             MyAudioPlayer.unmute()
@@ -77,9 +84,9 @@ class ViewController: UIViewController, UITextFieldDelegate {
             music.setBackgroundImage(UIImage(named: "mute"), for: .normal)
         }
     }
-    @IBAction func playerModeButton(sender : UIButton)
+    @IBAction func backButton(sender : UIButton)
     {
-        
+        self.navigationController?.popViewController(animated: true)
     }
     @IBAction func play(sender: UIButton)
     {
@@ -101,8 +108,5 @@ class ViewController: UIViewController, UITextFieldDelegate {
         self.view.endEditing(true)
         return true
     }
-    
-
-
 }
 

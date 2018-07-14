@@ -16,14 +16,13 @@ class BoardViewController: UIViewController {
     @IBOutlet var rematch : UIButton!
     @IBOutlet var boardView : UIView!
     @IBOutlet var quitButton : UIButton!
-    
-    
- 
     var count1 = 0
     var count2 = 0
     var name1 : String!
     var name2: String!
     @IBOutlet var play : UIButton!
+    var player : Int!
+    var level : String!
   
     override func viewDidLoad()
     {
@@ -37,7 +36,6 @@ class BoardViewController: UIViewController {
         quitButton.layer.cornerRadius = 5
         quitButton.layer.borderWidth = 1
         quitButton.layer.borderColor = UIColor.black.cgColor
-        
         if UserDefaults.standard.bool(forKey: "isPlaying")
         {
             MyAudioPlayer.unmute()

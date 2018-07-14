@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		1D5765FE20ED6E53003B2DFA /* PlayerSelectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D5765FD20ED6E53003B2DFA /* PlayerSelectionViewController.swift */; };
 		D128593B1FAC00CB008A0135 /* CustomAlertView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D128593A1FAC00CB008A0135 /* CustomAlertView.swift */; };
 		D196130F1FA3A956004C5218 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D196130E1FA3A956004C5218 /* AppDelegate.swift */; };
 		D19613111FA3A956004C5218 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D19613101FA3A956004C5218 /* ViewController.swift */; };
@@ -42,6 +43,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		1D5765FD20ED6E53003B2DFA /* PlayerSelectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayerSelectionViewController.swift; sourceTree = "<group>"; };
 		D128593A1FAC00CB008A0135 /* CustomAlertView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomAlertView.swift; sourceTree = "<group>"; };
 		D196130B1FA3A956004C5218 /* Tic Tac Toe.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Tic Tac Toe.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		D196130E1FA3A956004C5218 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -118,6 +120,7 @@
 				D1D61DF91FA7D9B900408576 /* MyAudioPlayer.swift */,
 				D19613101FA3A956004C5218 /* ViewController.swift */,
 				D19613121FA3A956004C5218 /* Main.storyboard */,
+				1D5765FD20ED6E53003B2DFA /* PlayerSelectionViewController.swift */,
 				D196133C1FA3BD28004C5218 /* BoardViewController.swift */,
 				D196133E1FA3C132004C5218 /* Board.swift */,
 				D128593A1FAC00CB008A0135 /* CustomAlertView.swift */,
@@ -298,6 +301,7 @@
 				D128593B1FAC00CB008A0135 /* CustomAlertView.swift in Sources */,
 				D19613111FA3A956004C5218 /* ViewController.swift in Sources */,
 				D196130F1FA3A956004C5218 /* AppDelegate.swift in Sources */,
+				1D5765FE20ED6E53003B2DFA /* PlayerSelectionViewController.swift in Sources */,
 				D1D61DFA1FA7D9B900408576 /* MyAudioPlayer.swift in Sources */,
 				D196133F1FA3C132004C5218 /* Board.swift in Sources */,
 				D196133D1FA3BD28004C5218 /* BoardViewController.swift in Sources */,
@@ -469,6 +473,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = FEF2KNS89A;
 				INFOPLIST_FILE = "Tic Tac Toe/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.aashana.ticktacktoe;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -484,6 +489,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = FEF2KNS89A;
 				INFOPLIST_FILE = "Tic Tac Toe/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.aashana.ticktacktoe;
 				PRODUCT_NAME = "$(TARGET_NAME)";

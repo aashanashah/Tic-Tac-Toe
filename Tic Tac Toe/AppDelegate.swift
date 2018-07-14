@@ -18,7 +18,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         UIApplication.shared.isStatusBarHidden = false
         let appdelegate = UIApplication.shared.delegate as! AppDelegate
         let mainStoryboard: UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
-        let homeViewController = mainStoryboard.instantiateViewController(withIdentifier: "ViewController") as! ViewController
+        let homeViewController = mainStoryboard.instantiateViewController(withIdentifier: "PlayerSelectionViewController") as! PlayerSelectionViewController
         let nav = UINavigationController(rootViewController: homeViewController)
         appdelegate.window!.rootViewController = nav
         

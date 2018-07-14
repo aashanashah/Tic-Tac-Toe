@@ -46,11 +46,14 @@ import AVFoundation
         setUpGameBoardCells()
         
         UIColor.black.setStroke()
-        do {
+        do
+        {
             try xplayer = AVAudioPlayer(contentsOf: URL(fileURLWithPath: pathX!))
             try oplayer = AVAudioPlayer(contentsOf: URL(fileURLWithPath: pathO!))
             try winplayer = AVAudioPlayer(contentsOf: URL(fileURLWithPath: pathWin!))
-        } catch {
+        }
+        catch
+        {
             print("Could not load file")
         }
         
@@ -70,8 +73,6 @@ import AVFoundation
         divider.stroke()
         setButtons()
     }
-    
-    
     func setUpGameBoardCells()
     {
         let gameBoardLength = min(bounds.size.height, bounds.size.width)
@@ -138,7 +139,6 @@ import AVFoundation
         button9.tag = 9
         self.addSubview(button9)
     }
-    
     @objc func buttonAction(sender : UIButton)
     {
         if gameState[sender.tag-1] == 0 && gamefinished == false
@@ -225,7 +225,46 @@ import AVFoundation
             controller.present(alert, animated: true, completion: nil)
         }
     }
-    
+    func computerPlay()
+    {
+        if controller.level == "Easy" && controller.player == 1
+        {
+            var randomNo = Int(arc4random_uniform(8))
+            while gameState[randomNo] != 0
+            {
+                randomNo = Int(arc4random_uniform(8))
+            }
+            if let sender = self.viewWithTag(randomNo) as? UIButton
+            {
+                if UserDefaults.standard.bool(forKey: "isPlaying")
+                {
+                    oplayer.play()
+                }
+                let circlePath = UIBezierPath(arcCenter: CGPoint(x: (sender.frame.origin.x) + cellWidth / 2.0, y: (sender.frame.origin.y) + cellWidth / 2.0), radius: ((cellWidth)/2)-20, startAngle: 0.0, endAngle: CGFloat(Double.pi * 2.0), clockwise: true)
+                
+                circleLayer = CAShapeLayer()
+                circleLayer.path = circlePath.cgPath
+                circleLayer.fillColor = UIColor.clear.cgColor
+                circleLayer.strokeColor = UIColor.red.cgColor
+                circleLayer.lineWidth = 10.0;
+                layerArray.insert(circleLayer,at:count)
+                count+=1
+                
+                self.layer.addSublayer(circleLayer)
+                let animation = CABasicAnimation(keyPath: "strokeEnd")
+                animation.fromValue = 0
+                animation.duration = 0.5
+                circleLayer.add(animation, forKey: "MyAnimation")
+                activeplayer = 1
+                gameState[sender.tag-1] = 2
+                controller.chanceLabel.text = controller.name1 + "'s Turn : X"
+            }
+        }
+        else
+        {
+            
+        }
+    }
     func checkWinner()
     {
         win = 0
@@ -461,7 +500,6 @@ import AVFoundation
         alert.show(animated: true)
 
     }
-    
     @IBAction func rematchClick(sender : UIButton)
     {
         if UserDefaults.standard.bool(forKey: "isPlaying")
