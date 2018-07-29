@@ -277,7 +277,6 @@
         <!--Controller-->
         <scene sceneID="ucp-2d-if4">
             <objects>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="o5G-FN-VQt" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <viewController storyboardIdentifier="BoardViewController" id="Dqn-eq-6jI" customClass="BoardViewController" customModule="Tic_Tac_Toe" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="A20-ZA-ojZ">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
@@ -425,6 +424,7 @@
                         <outlet property="rematch" destination="6D7-Zu-vOz" id="Pjq-GY-ra0"/>
                     </connections>
                 </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="o5G-FN-VQt" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1770" y="26.000000000000004"/>
         </scene>

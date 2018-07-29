@@ -83,11 +83,14 @@ class PlayerSelectionViewController: UIViewController {
                 multiPlayerButton.setTitle("Multi Player", for: .normal)
                 backButton.isHidden = true
             }
-            level = sender.currentTitle!
-            let viewController = self.storyboard?.instantiateViewController(withIdentifier: "ViewController") as! ViewController
-            viewController.player = player
-            viewController.level = level
-            self.navigationController?.pushViewController(viewController, animated: true)
+            else
+            {
+                level = sender.currentTitle!
+                let viewController = self.storyboard?.instantiateViewController(withIdentifier: "ViewController") as! ViewController
+                viewController.player = player
+                viewController.level = level
+                self.navigationController?.pushViewController(viewController, animated: true)
+            }
         }
     }
     @IBAction func play(sender: UIButton)

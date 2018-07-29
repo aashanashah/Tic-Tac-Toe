@@ -149,6 +149,9 @@ import AVFoundation
                 {
                     xplayer.play()
                 }
+                print(gameState)
+                print(sender.tag-1)
+                gameState[sender.tag-1] = 1
                 let crossPath = UIBezierPath()
                 crossPath.move(to: CGPoint(x:sender.frame.origin.x+20,y:sender.frame.origin.y+20))
                 crossPath.addLine(to: CGPoint(x:sender.frame.origin.x+cellWidth-20,y:sender.frame.origin.y+cellWidth-20))
@@ -182,7 +185,7 @@ import AVFoundation
                 crossLayer.add(animation, forKey: "MyAnimation")
 
                 activeplayer = 2
-                gameState[sender.tag-1] = 1
+                
                 controller.chanceLabel.text = controller.name2 + "'s Turn : O"
             }
             else
@@ -234,12 +237,15 @@ import AVFoundation
             {
                 randomNo = Int(arc4random_uniform(8))
             }
-            if let sender = self.viewWithTag(randomNo) as? UIButton
+            if let sender = self.viewWithTag(randomNo+1) as? UIButton
             {
+                print(gameState)
+                print(sender.tag-1)
                 if UserDefaults.standard.bool(forKey: "isPlaying")
                 {
                     oplayer.play()
                 }
+                gameState[sender.tag-1] = 2
                 let circlePath = UIBezierPath(arcCenter: CGPoint(x: (sender.frame.origin.x) + cellWidth / 2.0, y: (sender.frame.origin.y) + cellWidth / 2.0), radius: ((cellWidth)/2)-20, startAngle: 0.0, endAngle: CGFloat(Double.pi * 2.0), clockwise: true)
                 
                 circleLayer = CAShapeLayer()
@@ -256,8 +262,8 @@ import AVFoundation
                 animation.duration = 0.5
                 circleLayer.add(animation, forKey: "MyAnimation")
                 activeplayer = 1
-                gameState[sender.tag-1] = 2
                 controller.chanceLabel.text = controller.name1 + "'s Turn : X"
+                checkWinner()
             }
         }
         else
@@ -291,9 +297,10 @@ import AVFoundation
                 gamefinished = true
                 drawWinningLine()
                 win = 1
+                printWinner()
             }
         }
-        printWinner()
+        
         controller.player1.text = controller.name1 + " : \(controller.count1)"
         controller.player2.text = controller.name2 + " : \(controller.count2)"
         flag = 1
@@ -310,6 +317,10 @@ import AVFoundation
             controller.chanceLabel.text = "The game is draw"
             gamefinished = true
         }
+        if gamefinished == false && activeplayer == 2 && controller.player == 1
+        {
+            computerPlay()
+        }
     }
     func printWinner()
     {
@@ -317,11 +328,13 @@ import AVFoundation
         {
             controller.chanceLabel.text = controller.name1 + " has won!!"
             controller.count1 = controller.count1+1
+            activeplayer = 1
         }
         else if(owin == 1)
         {
             controller.chanceLabel.text = controller.name2 + " has won!!"
             controller.count2 = controller.count2+1
+            activeplayer = 2
         }
     }
     func drawWinningLine()
@@ -506,7 +519,6 @@ import AVFoundation
         {
             winplayer.stop()
         }
-        activeplayer = 1
         gamefinished = false
         controller.rematch.isHidden = true
         gameState = [0, 0, 0, 0, 0, 0, 0, 0, 0]
@@ -515,7 +527,19 @@ import AVFoundation
                 layer.removeFromSuperlayer()
             }
         }
-        controller.chanceLabel.text = controller.name1 + "'s Turn : X"
+        if activeplayer == 1
+        {
+            controller.chanceLabel.text = controller.name1 + "'s Turn : X"
+        }
+        else
+        {
+            controller.chanceLabel.text = controller.name2 + "'s Turn : O"
+            if controller.player == 1
+            {
+                computerPlay()
+            }
+        }
+        
         count = 0
     }
 }
