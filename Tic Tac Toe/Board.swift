@@ -149,8 +149,6 @@ import AVFoundation
                 {
                     xplayer.play()
                 }
-                print(gameState)
-                print(sender.tag-1)
                 gameState[sender.tag-1] = 1
                 let crossPath = UIBezierPath()
                 crossPath.move(to: CGPoint(x:sender.frame.origin.x+20,y:sender.frame.origin.y+20))
@@ -232,45 +230,251 @@ import AVFoundation
     {
         if controller.level == "Easy" && controller.player == 1
         {
-            var randomNo = Int(arc4random_uniform(8))
-            while gameState[randomNo] != 0
-            {
-                randomNo = Int(arc4random_uniform(8))
-            }
-            if let sender = self.viewWithTag(randomNo+1) as? UIButton
-            {
-                print(gameState)
-                print(sender.tag-1)
-                if UserDefaults.standard.bool(forKey: "isPlaying")
-                {
-                    oplayer.play()
-                }
-                gameState[sender.tag-1] = 2
-                let circlePath = UIBezierPath(arcCenter: CGPoint(x: (sender.frame.origin.x) + cellWidth / 2.0, y: (sender.frame.origin.y) + cellWidth / 2.0), radius: ((cellWidth)/2)-20, startAngle: 0.0, endAngle: CGFloat(Double.pi * 2.0), clockwise: true)
-                
-                circleLayer = CAShapeLayer()
-                circleLayer.path = circlePath.cgPath
-                circleLayer.fillColor = UIColor.clear.cgColor
-                circleLayer.strokeColor = UIColor.red.cgColor
-                circleLayer.lineWidth = 10.0;
-                layerArray.insert(circleLayer,at:count)
-                count+=1
-                
-                self.layer.addSublayer(circleLayer)
-                let animation = CABasicAnimation(keyPath: "strokeEnd")
-                animation.fromValue = 0
-                animation.duration = 0.5
-                circleLayer.add(animation, forKey: "MyAnimation")
-                activeplayer = 1
-                controller.chanceLabel.text = controller.name1 + "'s Turn : X"
-                checkWinner()
-            }
+            getRandomNo()
         }
-        else
+        else if controller.level == "Difficult" && controller.player == 1
         {
-            
+            let getId = getPlayingTileDifficultMode(playerNo: 2)
+            if getId != 10
+            {
+                computerDraw(playId: getId+1)
+            }
+            else
+            {
+                getRandomNo()
+            }
         }
     }
+    func getRandomNo()
+    {
+        var randomNo = Int(arc4random_uniform(8))
+        while gameState[randomNo] != 0
+        {
+            randomNo = Int(arc4random_uniform(8))
+        }
+        computerDraw(playId: randomNo+1)
+    }
+    func computerDraw(playId : Int)
+    {
+        if let sender = self.viewWithTag(playId) as? UIButton
+        {
+            if UserDefaults.standard.bool(forKey: "isPlaying")
+            {
+                oplayer.play()
+            }
+            gameState[sender.tag-1] = 2
+            let circlePath = UIBezierPath(arcCenter: CGPoint(x: (sender.frame.origin.x) + cellWidth / 2.0, y: (sender.frame.origin.y) + cellWidth / 2.0), radius: ((cellWidth)/2)-20, startAngle: 0.0, endAngle: CGFloat(Double.pi * 2.0), clockwise: true)
+            
+            circleLayer = CAShapeLayer()
+            circleLayer.path = circlePath.cgPath
+            circleLayer.fillColor = UIColor.clear.cgColor
+            circleLayer.strokeColor = UIColor.red.cgColor
+            circleLayer.lineWidth = 10.0;
+            layerArray.insert(circleLayer,at:count)
+            count+=1
+            
+            self.layer.addSublayer(circleLayer)
+            let animation = CABasicAnimation(keyPath: "strokeEnd")
+            animation.fromValue = 0
+            animation.duration = 0.5
+            circleLayer.add(animation, forKey: "MyAnimation")
+            activeplayer = 1
+            controller.chanceLabel.text = controller.name1 + "'s Turn : X"
+            checkWinner()
+        }
+    }
+    func getPlayingTileDifficultMode(playerNo:Int) -> Int
+    {
+        if gameState[0] == playerNo
+        {
+            if gameState[1] == playerNo
+            {
+                if gameState[2] == 0
+                {
+                    return 2
+                }
+            }
+            if gameState[2] == playerNo
+            {
+                if gameState[1] == 0
+                {
+                    return 1
+                }
+            }
+            if gameState[3] == playerNo
+            {
+                if gameState[6] == 0
+                {
+                    return 6
+                }
+            }
+            if gameState[6] == playerNo
+            {
+                if gameState[3] == 0
+                {
+                    return 3
+                }
+            }
+            if gameState[4] == playerNo
+            {
+                if gameState[8] == 0
+                {
+                    return 8
+                }
+            }
+            if gameState[8] == playerNo
+            {
+                if gameState[4] == 0
+                {
+                    return 4
+                }
+            }
+        }
+        if gameState[2] == playerNo
+        {
+            if gameState[1] == playerNo
+            {
+                if gameState[0] == 0
+                {
+                    return 0
+                }
+            }
+            if gameState[4] == playerNo
+            {
+                if gameState[6] == 0
+                {
+                    return 6
+                }
+            }
+            if gameState[6] == playerNo
+            {
+                if gameState[4] == 0
+                {
+                    return 4
+                }
+            }
+            if gameState[5] == playerNo
+            {
+                if gameState[8] == 0
+                {
+                    return 8
+                }
+            }
+            if gameState[8] == playerNo
+            {
+                if gameState[5] == 0
+                {
+                    return 5
+                }
+            }
+        }
+        if gameState[1] == playerNo
+        {
+            if gameState[4] == playerNo
+            {
+                if gameState[7] == 0
+                {
+                    return 7
+                }
+            }
+            if gameState[7] == playerNo
+            {
+                if gameState[4] == 0
+                {
+                    return 4
+                }
+            }
+        }
+        if gameState[3] == playerNo
+        {
+            if gameState[4] == playerNo
+            {
+                if gameState[5] == 0
+                {
+                    return 5
+                }
+            }
+            if gameState[5] == playerNo
+            {
+                if gameState[4] == 0
+                {
+                    return 4
+                }
+            }
+            if gameState[6] == playerNo
+            {
+                if gameState[0] == 0
+                {
+                    return 0
+                }
+            }
+        }
+        if gameState[4] == playerNo
+        {
+            if gameState[8] == playerNo
+            {
+                if gameState[0] == 0
+                {
+                    return 0
+                }
+            }
+            if gameState[7] == playerNo
+            {
+                if gameState[1] == 0
+                {
+                    return 1
+                }
+            }
+            if gameState[6] == playerNo
+            {
+                if gameState[2] == 0
+                {
+                    return 2
+                }
+            }
+            if gameState[5] == playerNo
+            {
+                if gameState[3] == 0
+                {
+                    return 3
+                }
+            }
+        }
+        if gameState[5] == playerNo
+        {
+            if gameState[8] == playerNo
+            {
+                if gameState[2] == 0
+                {
+                    return 2
+                }
+            }
+        }
+        if gameState[6] == playerNo
+        {
+            if gameState[7] == playerNo
+            {
+                if gameState[8] == 0
+                {
+                    return 8
+                }
+            }
+            if gameState[8] == playerNo
+            {
+                if gameState[7] == 0
+                {
+                    return 7
+                }
+            }
+        }
+        if playerNo == 2
+        {
+            let newID = getPlayingTileDifficultMode(playerNo: 1)
+            return newID
+        }
+        return 10
+    }
+    
     func checkWinner()
     {
         win = 0
