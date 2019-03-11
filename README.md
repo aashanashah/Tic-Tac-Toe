@@ -15,17 +15,17 @@ tic tac toe, tic tac toe 2 player, single player, free games, tic tac toe - free
 
 # Screenshots
 
-![](Screenshots/screen1.png) 
+![](Screenshots/screen1.jpg) 
 
-![](Screenshots/screen2.png) 
+![](Screenshots/screen2.jpg) 
 
-![](Screenshots/screen3.png) 
+![](Screenshots/screen3.jpg) 
 
-![](Screenshots/screen4.png) 
+![](Screenshots/screen4.jpg) 
 
-![](Screenshots/screen5.png) 
+![](Screenshots/screen5.jpg) 
 
-![](Screenshots/screen6.png) 
+![](Screenshots/screen6.jpg) 
 
 # Requirements
 
